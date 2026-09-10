@@ -1,0 +1,19 @@
+# Maven-generated files
+target/
+
+# NetBeans private settings
+nbproject/private/
+
+# Compiled Java files
+*.class
+
+# Log files
+*.log
+
+# Credentials and configuration
+.env
+config.properties
+
+# Windows and macOS files
+Thumbs.db
+.DS_Store
