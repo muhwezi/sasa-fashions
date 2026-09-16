@@ -194,7 +194,56 @@ public static String generateNextMaterialId()
     );
 }
 
+/**
+ * Generates the next purchase identifier.
+ *
+ * @return an identifier such as PUR-0001
+ * @throws SQLException when the identifier cannot be generated
+ */
+public static String generateNextPurchaseId()
+        throws SQLException {
 
+    return generateNextId(
+            "purchases",
+            "purchase_id",
+            "PUR-",
+            4
+    );
+}
+
+/**
+ * Generates the next purchase-detail identifier.
+ *
+ * @return an identifier such as PDT-0001
+ * @throws SQLException when the identifier cannot be generated
+ */
+public static String generateNextPurchaseDetailId()
+        throws SQLException {
+
+    return generateNextId(
+            "purchase_details",
+            "purchase_detail_id",
+            "PDT-",
+            4
+    );
+}
+
+/**
+ * Generates the next system-user identifier.
+ *
+ * @return an identifier such as USR-0001
+ * @throws SQLException when the identifier cannot be generated
+ */
+public static String generateNextUserId()
+        throws SQLException {
+
+    return generateNextId(
+            "users",
+            "user_id",
+            "USR-",
+            4
+    );
+}
     
     private static String generateNextId(
             String tableName,
