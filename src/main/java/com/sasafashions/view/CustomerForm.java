@@ -6,11 +6,14 @@ package com.sasafashions.view;
 
 
 
+import com.sasafashions.view.components.FormStyler;
+import com.sasafashions.view.components.MessageDialog;
 import com.sasafashions.dao.CustomerDAO;
+import com.sasafashions.model.Customer;
+import com.sasafashions.model.shared.ContactDetails;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
-import com.sasafashions.model.Customer;
 /**
  *
  * @author HP
@@ -22,25 +25,43 @@ public class CustomerForm extends javax.swing.JFrame {
     /**
      * Creates new form CustomerForm
      */
-    public CustomerForm() {
+public CustomerForm() {
+
     initComponents();
-    setLocationRelativeTo(null);
+
+    FormStyler.prepareFrame(this);
+
+    FormStyler.styleButtons(
+            btnNew,
+            btnSave,
+            btnFind,
+            btnEdit,
+            btnDelete,
+            btnFirst,
+            btnPrevious,
+            btnNext,
+            btnLast,
+            btnClose
+    );
+
     prepareNewCustomer();
 }
     
     
     
-    private void closeForm() {
+/**
+ * Requests confirmation before closing the form.
+ */
+private void closeForm() {
 
-    int confirmation = JOptionPane.showConfirmDialog(
+    boolean confirmed = MessageDialog.confirm(
             this,
-            "Do you want to close the Customer Registration form?",
-            "Confirm Close",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE
+            "Do you want to close the "
+                    + "Customer Registration form?",
+            "Confirm Close"
     );
 
-    if (confirmation == JOptionPane.YES_OPTION) {
+    if (confirmed) {
         dispose();
     }
 }
@@ -86,14 +107,18 @@ public class CustomerForm extends javax.swing.JFrame {
     
     
     
-    private void showNavigationError(SQLException error) {
+/**
+ * Displays an error encountered while navigating records.
+ *
+ * @param error database error
+ */
+private void showNavigationError(SQLException error) {
 
-    JOptionPane.showMessageDialog(
+    MessageDialog.showError(
             this,
             "Unable to navigate customer records.\n"
                     + error.getMessage(),
-            "Database Error",
-            JOptionPane.ERROR_MESSAGE
+            "Database Error"
     );
 }
     
@@ -431,7 +456,7 @@ public class CustomerForm extends javax.swing.JFrame {
     }
 
     // Accept 07XXXXXXXX or +2567XXXXXXXX
-    if (!telephone.matches("^(?:\\+256|0)\\d{9}$")) {
+if (!ContactDetails.isValidUgandanTelephone(telephone)) {
 
         JOptionPane.showMessageDialog(
                 this,
@@ -444,6 +469,8 @@ public class CustomerForm extends javax.swing.JFrame {
         txtTelephone.requestFocus();
         return;
     }
+
+telephone = ContactDetails.cleanTelephone(telephone);
 
     LocalDate registrationDate =
             LocalDate.parse(
@@ -626,7 +653,7 @@ private void prepareNewCustomer() {
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
-        cmbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
+        cmbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
         cmbGender.addActionListener(this::cmbGenderActionPerformed);
 
         btnNew.setText("NEW");
@@ -912,7 +939,7 @@ private void prepareNewCustomer() {
         return;
     }
 
-    if (!telephone.matches("^(?:\\+256|0)\\d{9}$")) {
+if (!ContactDetails.isValidUgandanTelephone(telephone)) {
 
         JOptionPane.showMessageDialog(
                 this,
@@ -925,6 +952,7 @@ private void prepareNewCustomer() {
         txtTelephone.requestFocus();
         return;
     }
+telephone = ContactDetails.cleanTelephone(telephone);
 
     int confirmation = JOptionPane.showConfirmDialog(
             this,

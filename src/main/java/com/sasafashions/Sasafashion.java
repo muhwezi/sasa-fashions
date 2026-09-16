@@ -12,10 +12,8 @@ public class Sasafashion {
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
-
-            CustomerForm customerForm =
-                    new CustomerForm();
-
+            CustomerForm customerForm = new CustomerForm();
+            customerForm.setLocationRelativeTo(null);
             customerForm.setVisible(true);
         });
     }

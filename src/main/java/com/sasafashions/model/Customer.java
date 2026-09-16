@@ -90,4 +90,21 @@ public class Customer {
     public void setCustomerStatus(String customerStatus) {
         this.customerStatus = customerStatus;
     }
+    /**
+ * Returns a readable customer description.
+ *
+ * This is used when a Customer object is displayed
+ * inside a JComboBox.
+ *
+ * @return customer ID and customer name
+ */
+@Override
+public String toString() {
+
+    return customerId
+            + " - "
+            + customerName;
+}
+    
+    
 }
