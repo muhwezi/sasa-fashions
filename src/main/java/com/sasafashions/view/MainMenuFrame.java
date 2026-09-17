@@ -1,22 +1,49 @@
 package com.sasafashions.view;
 
 import com.sasafashions.model.User;
+import com.sasafashions.report.PdfReportGenerator;
 import com.sasafashions.security.SessionManager;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Main navigation window for the Sasa Fashions Management System.
  *
- * <p>The window contains the ten required data-menu items and five
- * report-menu items.</p>
+ * <p>The frame contains ten Data functions, five PDF reports and
+ * account-management functions.</p>
  *
  * @author Joshua Muhwezi
  */
 public class MainMenuFrame extends JFrame {
 
-    private final JMenuBar menuBar = new JMenuBar();
+    private static final Color PURPLE =
+            new Color(74, 45, 125);
+
+    private static final Color DARK_PURPLE =
+            new Color(55, 31, 100);
+
+    private static final Color LIGHT_PURPLE =
+            new Color(237, 232, 247);
+
+    /**
+     * Blue used by Report and Account buttons.
+     */
+    private static final Color REPORT_BLUE =
+            new Color(35, 100, 190);
+
+    private static final Color BACKGROUND =
+            new Color(245, 246, 250);
+
+    private final PdfReportGenerator pdfReportGenerator =
+            new PdfReportGenerator();
+
+    private final JMenuBar menuBar =
+            new JMenuBar();
 
     private final JMenu dataMenu =
             new JMenu("Data");
@@ -24,31 +51,56 @@ public class MainMenuFrame extends JFrame {
     private final JMenu reportsMenu =
             new JMenu("Reports");
 
-    private final JLabel lblLoggedInUser =
-            new JLabel();
+    private final User currentUser;
 
     /**
-     * Creates the main application menu.
+     * Creates the main application dashboard.
      */
     public MainMenuFrame() {
 
         SessionManager.requireLogin();
 
-        setTitle("Sasa Fashions Management System");
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setSize(1050, 650);
+        currentUser =
+                SessionManager.getCurrentUser();
+
+        setTitle(
+                "Sasa Fashions Management System"
+        );
+
+        setDefaultCloseOperation(
+                JFrame.DO_NOTHING_ON_CLOSE
+        );
+
+        setSize(1200, 750);
+
+        setMinimumSize(
+                new Dimension(1000, 650)
+        );
+
         setLocationRelativeTo(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         createMenuBar();
         createDashboard();
         registerWindowClosing();
+
+        setExtendedState(
+                JFrame.MAXIMIZED_BOTH
+        );
     }
 
     /**
      * Creates the Data and Reports menus.
      */
     private void createMenuBar() {
+
+        menuBar.setBorder(
+                BorderFactory.createEmptyBorder(
+                        3, 8, 3, 8
+                )
+        );
+
+        dataMenu.setMnemonic('D');
+        reportsMenu.setMnemonic('R');
 
         createDataMenu();
         createReportsMenu();
@@ -65,78 +117,65 @@ public class MainMenuFrame extends JFrame {
     private void createDataMenu() {
 
         JMenuItem customerItem =
-                new JMenuItem("1. Customers");
+                createMenuItem(
+                        "1. Customers",
+                        this::openCustomers
+                );
 
         JMenuItem employeeItem =
-                new JMenuItem("2. Employees");
+                createMenuItem(
+                        "2. Employees",
+                        this::openEmployees
+                );
 
         JMenuItem productItem =
-                new JMenuItem("3. Products");
+                createMenuItem(
+                        "3. Products",
+                        this::openProducts
+                );
 
         JMenuItem measurementItem =
-                new JMenuItem("4. Measurements");
+                createMenuItem(
+                        "4. Measurements",
+                        this::openMeasurements
+                );
 
         JMenuItem orderItem =
-                new JMenuItem("5. Orders");
+                createMenuItem(
+                        "5. Orders",
+                        this::openOrders
+                );
 
         JMenuItem paymentItem =
-                new JMenuItem("6. Payments");
+                createMenuItem(
+                        "6. Payments",
+                        this::openPayments
+                );
 
         JMenuItem supplierItem =
-                new JMenuItem("7. Suppliers");
+                createMenuItem(
+                        "7. Suppliers",
+                        this::openSuppliers
+                );
 
         JMenuItem materialItem =
-                new JMenuItem("8. Materials");
+                createMenuItem(
+                        "8. Materials",
+                        this::openMaterials
+                );
 
         JMenuItem purchaseItem =
-                new JMenuItem("9. Purchases");
+                createMenuItem(
+                        "9. Purchases",
+                        this::openPurchases
+                );
 
         JMenuItem userItem =
-                new JMenuItem("10. Users");
+                createMenuItem(
+                        "10. Users",
+                        this::openUsers
+                );
 
-        customerItem.addActionListener(
-                event -> openCustomers()
-        );
-
-        employeeItem.addActionListener(
-                event -> openEmployees()
-        );
-
-        productItem.addActionListener(
-                event -> openProducts()
-        );
-
-        measurementItem.addActionListener(
-                event -> openMeasurements()
-        );
-
-        orderItem.addActionListener(
-                event -> openOrders()
-        );
-
-        paymentItem.addActionListener(
-                event -> openPayments()
-        );
-
-        supplierItem.addActionListener(
-                event -> openSuppliers()
-        );
-
-        materialItem.addActionListener(
-                event -> openMaterials()
-        );
-
-        purchaseItem.addActionListener(
-                event -> openPurchases()
-        );
-
-        userItem.addActionListener(
-                event -> openUsers()
-        );
-
-        /*
-         * Only an administrator should access user management.
-         */
         userItem.setEnabled(
                 SessionManager.isAdministrator()
         );
@@ -159,66 +198,185 @@ public class MainMenuFrame extends JFrame {
      */
     private void createReportsMenu() {
 
-        JMenuItem customerReport =
-                new JMenuItem("1. Customer Report");
-
-        JMenuItem orderReport =
-                new JMenuItem("2. Order Report");
-
-        JMenuItem paymentReport =
-                new JMenuItem("3. Payment Report");
-
-        JMenuItem stockReport =
-                new JMenuItem("4. Material Stock Report");
-
-        JMenuItem purchaseReport =
-                new JMenuItem("5. Purchase Report");
-
-        customerReport.addActionListener(
-                event -> reportNotReady("Customer Report")
-        );
-
-        orderReport.addActionListener(
-                event -> reportNotReady("Order Report")
-        );
-
-        paymentReport.addActionListener(
-                event -> reportNotReady("Payment Report")
-        );
-
-        stockReport.addActionListener(
-                event -> reportNotReady(
-                        "Material Stock Report"
+        reportsMenu.add(
+                createMenuItem(
+                        "1. Customer Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generateCustomerReport(
+                                                this
+                                        )
                 )
         );
 
-        purchaseReport.addActionListener(
-                event -> reportNotReady("Purchase Report")
+        reportsMenu.add(
+                createMenuItem(
+                        "2. Order Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generateOrderReport(
+                                                this
+                                        )
+                )
         );
 
-        reportsMenu.add(customerReport);
-        reportsMenu.add(orderReport);
-        reportsMenu.add(paymentReport);
-        reportsMenu.add(stockReport);
-        reportsMenu.add(purchaseReport);
+        reportsMenu.add(
+                createMenuItem(
+                        "3. Payment Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generatePaymentReport(
+                                                this
+                                        )
+                )
+        );
+
+        reportsMenu.add(
+                createMenuItem(
+                        "4. Material Stock Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generateMaterialStockReport(
+                                                this
+                                        )
+                )
+        );
+
+        reportsMenu.add(
+                createMenuItem(
+                        "5. Purchase Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generatePurchaseReport(
+                                                this
+                                        )
+                )
+        );
     }
 
     /**
-     * Creates the visible dashboard.
+     * Creates a menu item and connects its operation.
+     */
+    private JMenuItem createMenuItem(
+            String text,
+            Runnable action
+    ) {
+
+        JMenuItem item =
+                new JMenuItem(text);
+
+        item.addActionListener(
+                event -> action.run()
+        );
+
+        return item;
+    }
+
+    /**
+     * Creates the complete dashboard.
      */
     private void createDashboard() {
 
-        JPanel headerPanel = new JPanel(
-                new BorderLayout()
+        setLayout(new BorderLayout());
+
+        add(
+                createHeaderPanel(),
+                BorderLayout.NORTH
         );
 
-        headerPanel.setBackground(
-                new Color(74, 45, 125)
+        JPanel dashboardContent =
+                new JPanel();
+
+        dashboardContent.setLayout(
+                new BoxLayout(
+                        dashboardContent,
+                        BoxLayout.Y_AXIS
+                )
         );
+
+        dashboardContent.setBackground(
+                BACKGROUND
+        );
+
+        dashboardContent.setBorder(
+                new EmptyBorder(
+                        25,
+                        35,
+                        30,
+                        35
+                )
+        );
+
+        dashboardContent.add(
+                createWelcomePanel()
+        );
+
+        dashboardContent.add(
+                Box.createVerticalStrut(20)
+        );
+
+        dashboardContent.add(
+                createDataSection()
+        );
+
+        dashboardContent.add(
+                Box.createVerticalStrut(22)
+        );
+
+        dashboardContent.add(
+                createReportsSection()
+        );
+
+        dashboardContent.add(
+                Box.createVerticalStrut(22)
+        );
+
+        dashboardContent.add(
+                createAccountSection()
+        );
+
+        JScrollPane scrollPane =
+                new JScrollPane(
+                        dashboardContent
+                );
+
+        scrollPane.setBorder(null);
+
+        scrollPane.getVerticalScrollBar()
+                .setUnitIncrement(16);
+
+        scrollPane.getViewport()
+                .setBackground(BACKGROUND);
+
+        add(
+                scrollPane,
+                BorderLayout.CENTER
+        );
+
+        add(
+                createFooterPanel(),
+                BorderLayout.SOUTH
+        );
+    }
+
+    /**
+     * Creates the purple application heading.
+     */
+    private JPanel createHeaderPanel() {
+
+        JPanel headerPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        headerPanel.setBackground(PURPLE);
 
         headerPanel.setBorder(
-                BorderFactory.createEmptyBorder(
-                        18, 25, 18, 25
+                new EmptyBorder(
+                        20,
+                        30,
+                        20,
+                        30
                 )
         );
 
@@ -227,149 +385,739 @@ public class MainMenuFrame extends JFrame {
         );
 
         lblTitle.setForeground(Color.WHITE);
-        lblTitle.setFont(
-                new Font("Arial", Font.BOLD, 24)
-        );
 
-        User currentUser =
-                SessionManager.getCurrentUser();
+        lblTitle.setFont(
+                new Font(
+                        "Arial",
+                        Font.BOLD,
+                        25
+                )
+        );
 
         String roleName =
-                getRoleName(currentUser.getRoleId());
+                getRoleName(
+                        currentUser.getRoleId()
+                );
 
-        lblLoggedInUser.setText(
-                "Logged in as: "
-                        + currentUser.getUsername()
-                        + " | Role: "
-                        + roleName
+        JLabel lblLoggedInUser =
+                new JLabel(
+                        "Logged in as: "
+                                + currentUser.getUsername()
+                                + "  |  Role: "
+                                + roleName
+                );
+
+        lblLoggedInUser.setForeground(
+                Color.WHITE
         );
 
-        lblLoggedInUser.setForeground(Color.WHITE);
         lblLoggedInUser.setFont(
-                new Font("Arial", Font.PLAIN, 14)
+                new Font(
+                        "Arial",
+                        Font.PLAIN,
+                        14
+                )
         );
 
-        headerPanel.add(lblTitle, BorderLayout.WEST);
+        headerPanel.add(
+                lblTitle,
+                BorderLayout.WEST
+        );
+
         headerPanel.add(
                 lblLoggedInUser,
                 BorderLayout.EAST
         );
 
-        JPanel centrePanel = new JPanel(
-                new GridBagLayout()
+        return headerPanel;
+    }
+
+    /**
+     * Creates the welcome section.
+     */
+    private JPanel createWelcomePanel() {
+
+        JPanel welcomePanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        welcomePanel.setAlignmentX(
+                Component.LEFT_ALIGNMENT
         );
 
-        centrePanel.setBackground(
-                new Color(245, 245, 250)
-        );
-
-        JPanel welcomePanel = new JPanel();
-        welcomePanel.setLayout(
-                new BoxLayout(
-                        welcomePanel,
-                        BoxLayout.Y_AXIS
+        welcomePanel.setMaximumSize(
+                new Dimension(
+                        Integer.MAX_VALUE,
+                        95
                 )
         );
 
-        welcomePanel.setBackground(Color.WHITE);
+        welcomePanel.setBackground(
+                Color.WHITE
+        );
+
         welcomePanel.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
-                                new Color(210, 210, 220)
+                                new Color(
+                                        220,
+                                        220,
+                                        228
+                                )
                         ),
-                        BorderFactory.createEmptyBorder(
-                                45, 70, 45, 70
+                        new EmptyBorder(
+                                18,
+                                22,
+                                18,
+                                22
                         )
                 )
         );
 
-        JLabel lblWelcome = new JLabel(
-                "Welcome to Sasa Fashions"
-        );
+        JPanel textPanel =
+                new JPanel();
 
-        lblWelcome.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
-
-        lblWelcome.setFont(
-                new Font("Arial", Font.BOLD, 30)
-        );
-
-        lblWelcome.setForeground(
-                new Color(74, 45, 125)
-        );
-
-        JLabel lblDescription = new JLabel(
-                "Tailoring Business Management System"
-        );
-
-        lblDescription.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
-
-        lblDescription.setFont(
-                new Font("Arial", Font.PLAIN, 18)
-        );
-
-        JButton btnLogout =
-                new JButton("Logout");
-
-        btnLogout.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
-
-        btnLogout.addActionListener(
-                event -> logout()
-        );
-
-        welcomePanel.add(lblWelcome);
-        welcomePanel.add(Box.createVerticalStrut(15));
-        welcomePanel.add(lblDescription);
-        welcomePanel.add(Box.createVerticalStrut(30));
-        welcomePanel.add(btnLogout);
-
-        centrePanel.add(welcomePanel);
-
-        JLabel footer = new JLabel(
-                "Sasa Fashions © 2026",
-                SwingConstants.CENTER
-        );
-
-        footer.setBorder(
-                BorderFactory.createEmptyBorder(
-                        10, 10, 10, 10
+        textPanel.setLayout(
+                new BoxLayout(
+                        textPanel,
+                        BoxLayout.Y_AXIS
                 )
         );
 
-        add(headerPanel, BorderLayout.NORTH);
-        add(centrePanel, BorderLayout.CENTER);
-        add(footer, BorderLayout.SOUTH);
+        textPanel.setOpaque(false);
+
+        JLabel lblWelcome =
+                new JLabel(
+                        "Welcome, "
+                                + currentUser.getUsername()
+                );
+
+        lblWelcome.setFont(
+                new Font(
+                        "Arial",
+                        Font.BOLD,
+                        22
+                )
+        );
+
+        lblWelcome.setForeground(PURPLE);
+
+        JLabel lblInstruction =
+                new JLabel(
+                        "Select a Data function or generate a customized PDF report."
+                );
+
+        lblInstruction.setFont(
+                new Font(
+                        "Arial",
+                        Font.PLAIN,
+                        14
+                )
+        );
+
+        lblInstruction.setForeground(
+                Color.DARK_GRAY
+        );
+
+        textPanel.add(lblWelcome);
+
+        textPanel.add(
+                Box.createVerticalStrut(7)
+        );
+
+        textPanel.add(lblInstruction);
+
+        welcomePanel.add(
+                textPanel,
+                BorderLayout.WEST
+        );
+
+        return welcomePanel;
     }
 
-private String getRoleName(String roleId) {
+    /**
+     * Creates the ten organized Data buttons.
+     */
+    private JPanel createDataSection() {
 
-    if ("ROLE-001".equals(roleId)) {
-        return "Administrator";
+        JPanel sectionPanel =
+                createSectionPanel(
+                        "DATA MANAGEMENT",
+                        "Manage the main records used by Sasa Fashions.",
+                        250
+                );
+
+        JPanel buttonsPanel =
+                new JPanel(
+                        new GridLayout(
+                                2,
+                                5,
+                                14,
+                                14
+                        )
+                );
+
+        buttonsPanel.setOpaque(false);
+
+        JButton customerButton =
+                createDataButton(
+                        "Customers",
+                        "Register and manage customers",
+                        this::openCustomers
+                );
+
+        JButton employeeButton =
+                createDataButton(
+                        "Employees",
+                        "Register and manage employees",
+                        this::openEmployees
+                );
+
+        JButton productButton =
+                createDataButton(
+                        "Products",
+                        "Manage tailoring products",
+                        this::openProducts
+                );
+
+        JButton measurementButton =
+                createDataButton(
+                        "Measurements",
+                        "Record customer measurements",
+                        this::openMeasurements
+                );
+
+        JButton orderButton =
+                createDataButton(
+                        "Orders",
+                        "Create and manage customer orders",
+                        this::openOrders
+                );
+
+        JButton paymentButton =
+                createDataButton(
+                        "Payments",
+                        "Record customer payments",
+                        this::openPayments
+                );
+
+        JButton supplierButton =
+                createDataButton(
+                        "Suppliers",
+                        "Register and manage suppliers",
+                        this::openSuppliers
+                );
+
+        JButton materialButton =
+                createDataButton(
+                        "Materials",
+                        "Manage tailoring materials",
+                        this::openMaterials
+                );
+
+        JButton purchaseButton =
+                createDataButton(
+                        "Purchases",
+                        "Record material purchases",
+                        this::openPurchases
+                );
+
+        JButton userButton =
+                createDataButton(
+                        "Users",
+                        "Manage system users",
+                        this::openUsers
+                );
+
+        userButton.setEnabled(
+                SessionManager.isAdministrator()
+        );
+
+        if (!SessionManager.isAdministrator()) {
+
+            userButton.setToolTipText(
+                    "Administrator permission is required."
+            );
+        }
+
+        buttonsPanel.add(customerButton);
+        buttonsPanel.add(employeeButton);
+        buttonsPanel.add(productButton);
+        buttonsPanel.add(measurementButton);
+        buttonsPanel.add(orderButton);
+
+        buttonsPanel.add(paymentButton);
+        buttonsPanel.add(supplierButton);
+        buttonsPanel.add(materialButton);
+        buttonsPanel.add(purchaseButton);
+        buttonsPanel.add(userButton);
+
+        sectionPanel.add(
+                buttonsPanel,
+                BorderLayout.CENTER
+        );
+
+        return sectionPanel;
     }
 
-    if ("ROLE-002".equals(roleId)) {
-        return "Manager";
+    /**
+     * Creates the five blue Report buttons.
+     */
+    private JPanel createReportsSection() {
+
+        JPanel sectionPanel =
+                createSectionPanel(
+                        "PDF REPORTS",
+                        "Generate and save customized business reports.",
+                        185
+                );
+
+        JPanel buttonsPanel =
+                new JPanel(
+                        new GridLayout(
+                                1,
+                                5,
+                                14,
+                                14
+                        )
+                );
+
+        buttonsPanel.setOpaque(false);
+
+        buttonsPanel.add(
+                createBlueButton(
+                        "Customer Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generateCustomerReport(
+                                                this
+                                        )
+                )
+        );
+
+        buttonsPanel.add(
+                createBlueButton(
+                        "Order Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generateOrderReport(
+                                                this
+                                        )
+                )
+        );
+
+        buttonsPanel.add(
+                createBlueButton(
+                        "Payment Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generatePaymentReport(
+                                                this
+                                        )
+                )
+        );
+
+        buttonsPanel.add(
+                createBlueButton(
+                        "Material Stock",
+                        () ->
+                                pdfReportGenerator
+                                        .generateMaterialStockReport(
+                                                this
+                                        )
+                )
+        );
+
+        buttonsPanel.add(
+                createBlueButton(
+                        "Purchase Report",
+                        () ->
+                                pdfReportGenerator
+                                        .generatePurchaseReport(
+                                                this
+                                        )
+                )
+        );
+
+        sectionPanel.add(
+                buttonsPanel,
+                BorderLayout.CENTER
+        );
+
+        return sectionPanel;
     }
 
-    if ("ROLE-003".equals(roleId)) {
-        return "Cashier";
+    /**
+     * Creates the blue Account buttons.
+     */
+    private JPanel createAccountSection() {
+
+        JPanel sectionPanel =
+                createSectionPanel(
+                        "ACCOUNT",
+                        "Manage your password or end the current session.",
+                        155
+                );
+
+        JPanel buttonsPanel =
+                new JPanel(
+                        new FlowLayout(
+                                FlowLayout.LEFT,
+                                12,
+                                5
+                        )
+                );
+
+        buttonsPanel.setOpaque(false);
+
+        buttonsPanel.add(
+                createBlueButton(
+                        "Change Password",
+                        this::changePassword
+                )
+        );
+
+        buttonsPanel.add(
+                createBlueButton(
+                        "Logout",
+                        this::logout
+                )
+        );
+
+        buttonsPanel.add(
+                createBlueButton(
+                        "Exit Application",
+                        this::exitApplication
+                )
+        );
+
+        sectionPanel.add(
+                buttonsPanel,
+                BorderLayout.CENTER
+        );
+
+        return sectionPanel;
     }
 
-    if ("ROLE-004".equals(roleId)) {
-        return "Tailor";
+    /**
+     * Creates a reusable dashboard section.
+     */
+    private JPanel createSectionPanel(
+            String title,
+            String description,
+            int maximumHeight
+    ) {
+
+        JPanel sectionPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        sectionPanel.setAlignmentX(
+                Component.LEFT_ALIGNMENT
+        );
+
+        sectionPanel.setMaximumSize(
+                new Dimension(
+                        Integer.MAX_VALUE,
+                        maximumHeight
+                )
+        );
+
+        sectionPanel.setBackground(
+                Color.WHITE
+        );
+
+        sectionPanel.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(
+                                        220,
+                                        220,
+                                        228
+                                )
+                        ),
+                        new EmptyBorder(
+                                16,
+                                18,
+                                18,
+                                18
+                        )
+                )
+        );
+
+        JPanel headingPanel =
+                new JPanel();
+
+        headingPanel.setLayout(
+                new BoxLayout(
+                        headingPanel,
+                        BoxLayout.Y_AXIS
+                )
+        );
+
+        headingPanel.setOpaque(false);
+
+        headingPanel.setBorder(
+                new EmptyBorder(
+                        0,
+                        0,
+                        12,
+                        0
+                )
+        );
+
+        JLabel lblTitle =
+                new JLabel(title);
+
+        lblTitle.setFont(
+                new Font(
+                        "Arial",
+                        Font.BOLD,
+                        17
+                )
+        );
+
+        lblTitle.setForeground(PURPLE);
+
+        JLabel lblDescription =
+                new JLabel(description);
+
+        lblDescription.setFont(
+                new Font(
+                        "Arial",
+                        Font.PLAIN,
+                        12
+                )
+        );
+
+        lblDescription.setForeground(
+                Color.GRAY
+        );
+
+        headingPanel.add(lblTitle);
+
+        headingPanel.add(
+                Box.createVerticalStrut(4)
+        );
+
+        headingPanel.add(lblDescription);
+
+        sectionPanel.add(
+                headingPanel,
+                BorderLayout.NORTH
+        );
+
+        return sectionPanel;
     }
 
-    if ("ROLE-005".equals(roleId)) {
-        return "Staff";
+    /**
+     * Creates a light-purple Data button.
+     */
+    private JButton createDataButton(
+            String text,
+            String toolTip,
+            Runnable action
+    ) {
+
+        JButton button =
+                new JButton(text);
+
+        button.setPreferredSize(
+                new Dimension(170, 72)
+        );
+
+        button.setFont(
+                new Font(
+                        "Arial",
+                        Font.BOLD,
+                        14
+                )
+        );
+
+        button.setForeground(PURPLE);
+        button.setBackground(LIGHT_PURPLE);
+
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setFocusPainted(false);
+
+        button.setCursor(
+                Cursor.getPredefinedCursor(
+                        Cursor.HAND_CURSOR
+                )
+        );
+
+        button.setToolTipText(toolTip);
+
+        button.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(
+                                        190,
+                                        175,
+                                        220
+                                )
+                        ),
+                        new EmptyBorder(
+                                12,
+                                12,
+                                12,
+                                12
+                        )
+                )
+        );
+
+        button.addActionListener(
+                event -> action.run()
+        );
+
+        return button;
     }
 
-    return "Unknown";
-}
+    /**
+     * Creates a blue button with white text.
+     *
+     * <p>This method is used by both Report and Account buttons.</p>
+     */
+    private JButton createBlueButton(
+            String text,
+            Runnable action
+    ) {
+
+        JButton button =
+                new JButton(text);
+
+        button.setPreferredSize(
+                new Dimension(180, 58)
+        );
+
+        button.setFont(
+                new Font(
+                        "Arial",
+                        Font.BOLD,
+                        13
+                )
+        );
+
+        button.setForeground(Color.WHITE);
+        button.setBackground(REPORT_BLUE);
+
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+
+        button.setCursor(
+                Cursor.getPredefinedCursor(
+                        Cursor.HAND_CURSOR
+                )
+        );
+
+        button.setBorder(
+                new EmptyBorder(
+                        12,
+                        18,
+                        12,
+                        18
+                )
+        );
+
+        button.addActionListener(
+                event -> action.run()
+        );
+
+        return button;
+    }
+
+    /**
+     * Creates the application footer.
+     */
+    private JPanel createFooterPanel() {
+
+        JPanel footerPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        footerPanel.setBackground(
+                DARK_PURPLE
+        );
+
+        footerPanel.setBorder(
+                new EmptyBorder(
+                        9,
+                        25,
+                        9,
+                        25
+                )
+        );
+
+        JLabel lblBusiness =
+                new JLabel(
+                        "Sasa Fashions © 2026"
+                );
+
+        lblBusiness.setForeground(
+                Color.WHITE
+        );
+
+        JLabel lblSystem =
+                new JLabel(
+                        "Tailoring Business Management System"
+                );
+
+        lblSystem.setForeground(
+                new Color(
+                        220,
+                        215,
+                        235
+                )
+        );
+
+        footerPanel.add(
+                lblBusiness,
+                BorderLayout.WEST
+        );
+
+        footerPanel.add(
+                lblSystem,
+                BorderLayout.EAST
+        );
+
+        return footerPanel;
+    }
+
+    /**
+     * Returns a readable role name.
+     */
+    private String getRoleName(
+            String roleId
+    ) {
+
+        if ("ROLE-001".equals(roleId)) {
+            return "Administrator";
+        }
+
+        if ("ROLE-002".equals(roleId)) {
+            return "Manager";
+        }
+
+        if ("ROLE-003".equals(roleId)) {
+            return "Cashier";
+        }
+
+        if ("ROLE-004".equals(roleId)) {
+            return "Tailor";
+        }
+
+        if ("ROLE-005".equals(roleId)) {
+            return "Staff";
+        }
+
+        return "Unknown";
+    }
 
     private void openCustomers() {
         new CustomerForm().setVisible(true);
@@ -408,79 +1156,98 @@ private String getRoleName(String roleId) {
     }
 
     private void openUsers() {
+
+        if (!SessionManager.isAdministrator()) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Administrator permission is required.",
+                    "Access Denied",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
         new UserForm().setVisible(true);
     }
 
     /**
-     * Temporary response until PDF reports are implemented.
+     * Opens the password-change screen.
      */
-    private void reportNotReady(String reportName) {
+    private void changePassword() {
 
-        JOptionPane.showMessageDialog(
-                this,
-                reportName
-                        + " will be implemented in the reporting stage.",
-                "Report",
-                JOptionPane.INFORMATION_MESSAGE
-        );
+        new ChangePasswordForm(
+                SessionManager.getCurrentUser()
+        ).setVisible(true);
     }
 
     /**
-     * Ends the current user session.
-     *
-     * <p>The LoginForm will be opened here after it is created.</p>
+     * Logs out and returns to the login screen.
      */
     private void logout() {
 
-        int answer = JOptionPane.showConfirmDialog(
-                this,
-                "Do you want to log out?",
-                "Confirm Logout",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE
-        );
+        int answer =
+                JOptionPane.showConfirmDialog(
+                        this,
+                        "Do you want to log out?",
+                        "Confirm Logout",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
 
-        if (answer != JOptionPane.YES_OPTION) {
+        if (answer
+                != JOptionPane.YES_OPTION) {
+
             return;
         }
 
         SessionManager.logout();
         dispose();
 
-        /*
-         * LoginForm will replace this temporary application exit
-         * in the next step.
-         */
-        System.exit(0);
+        SwingUtilities.invokeLater(
+                () ->
+                        new LoginForm()
+                                .setVisible(true)
+        );
     }
 
     /**
-     * Confirms before closing the entire application.
+     * Confirms and closes the application.
+     */
+    private void exitApplication() {
+
+        int answer =
+                JOptionPane.showConfirmDialog(
+                        this,
+                        "Do you want to exit Sasa Fashions?",
+                        "Confirm Exit",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+
+        if (answer
+                == JOptionPane.YES_OPTION) {
+
+            SessionManager.logout();
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Handles the window close button.
      */
     private void registerWindowClosing() {
 
         addWindowListener(
-                new java.awt.event.WindowAdapter() {
+                new WindowAdapter() {
 
                     @Override
                     public void windowClosing(
-                            java.awt.event.WindowEvent event
+                            WindowEvent event
                     ) {
 
-                        int answer =
-                                JOptionPane.showConfirmDialog(
-                                        MainMenuFrame.this,
-                                        "Exit Sasa Fashions?",
-                                        "Confirm Exit",
-                                        JOptionPane.YES_NO_OPTION
-                                );
-
-                        if (answer
-                                == JOptionPane.YES_OPTION) {
-
-                            SessionManager.logout();
-                            System.exit(0);
-                        }
+                        exitApplication();
                     }
                 }
         );
