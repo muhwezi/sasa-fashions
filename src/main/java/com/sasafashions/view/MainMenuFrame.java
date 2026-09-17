@@ -346,22 +346,30 @@ public class MainMenuFrame extends JFrame {
         add(footer, BorderLayout.SOUTH);
     }
 
-    private String getRoleName(String roleId) {
+private String getRoleName(String roleId) {
 
-        if ("ROL-0001".equals(roleId)) {
-            return "Administrator";
-        }
-
-        if ("ROL-0002".equals(roleId)) {
-            return "Manager";
-        }
-
-        if ("ROL-0003".equals(roleId)) {
-            return "Staff";
-        }
-
-        return "Unknown";
+    if ("ROLE-001".equals(roleId)) {
+        return "Administrator";
     }
+
+    if ("ROLE-002".equals(roleId)) {
+        return "Manager";
+    }
+
+    if ("ROLE-003".equals(roleId)) {
+        return "Cashier";
+    }
+
+    if ("ROLE-004".equals(roleId)) {
+        return "Tailor";
+    }
+
+    if ("ROLE-005".equals(roleId)) {
+        return "Staff";
+    }
+
+    return "Unknown";
+}
 
     private void openCustomers() {
         new CustomerForm().setVisible(true);

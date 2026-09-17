@@ -139,27 +139,21 @@ public class UserForm extends JFrame {
     /**
      * Adds the available system roles.
      */
-    private void prepareRoles() {
+private void prepareRoles() {
 
-        roles.put(
-                "Administrator",
-                "ROL-0001"
-        );
+    roles.clear();
+    cmbRole.removeAllItems();
 
-        roles.put(
-                "Manager",
-                "ROL-0002"
-        );
+    roles.put("Administrator", "ROLE-001");
+    roles.put("Manager", "ROLE-002");
+    roles.put("Cashier", "ROLE-003");
+    roles.put("Tailor", "ROLE-004");
+    roles.put("Staff", "ROLE-005");
 
-        roles.put(
-                "Staff",
-                "ROL-0003"
-        );
-
-        for (String roleName : roles.keySet()) {
-            cmbRole.addItem(roleName);
-        }
+    for (String roleName : roles.keySet()) {
+        cmbRole.addItem(roleName);
     }
+}
 
     /**
      * Creates the visible interface.
