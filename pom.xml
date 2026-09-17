@@ -29,6 +29,16 @@
             <version>26.7.0</version>
         </dependency>
 
+<!-- Creates customized PDF reports -->
+<dependency>
+    <groupId>com.github.librepdf</groupId>
+    <artifactId>openpdf</artifactId>
+    <version>3.0.5</version>
+</dependency>
+
+
+
+
     </dependencies>
 
 
