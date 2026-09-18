@@ -1227,9 +1227,13 @@ public class OrderForm extends JFrame {
         }
     }
 
-    /**
-     * Loads active orders into Queue<Order>.
-     */
+ /**
+ * Loads active orders into a {@code Queue<Order>}.
+ *
+ * <p>The active orders are retrieved from the database and placed
+ * into the queue in the order in which they should be processed.
+ * The form then displays the number of active queued orders.</p>
+ */
     private void refreshOrderQueue() {
 
         try {

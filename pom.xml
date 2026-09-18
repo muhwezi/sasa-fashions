@@ -52,7 +52,7 @@
             <version>3.12.0</version>
 
             <configuration>
-                <show>private</show>
+                <show>public</show>
 
                 <author>true</author>
                 <version>true</version>
