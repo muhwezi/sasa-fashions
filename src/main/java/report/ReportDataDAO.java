@@ -18,7 +18,7 @@ import java.util.List;
  * column order remains the same as the SQL query order. All rows
  * are stored inside an ArrayList.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  */
 public class ReportDataDAO {
 

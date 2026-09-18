@@ -36,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  * Provides the interface for recording customer measurements.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class MeasurementForm extends JFrame {

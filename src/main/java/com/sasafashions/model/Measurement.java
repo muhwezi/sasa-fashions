@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * Each Measurement object corresponds to one record in
  * the measurements database table.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class Measurement {

@@ -4,7 +4,7 @@ package com.sasafashions.dao.util;
  * Represents an error that occurs while a DAO class
  * is communicating with the database.
  *
- * @author HP
+ * @author SASA Group
  */
 public class DAOException extends RuntimeException {
 

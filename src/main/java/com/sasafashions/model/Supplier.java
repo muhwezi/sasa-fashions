@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * <p>The class stores the supplier's contact information,
  * registration date and operating status.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class Supplier {

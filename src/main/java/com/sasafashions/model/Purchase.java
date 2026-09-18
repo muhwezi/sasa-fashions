@@ -12,7 +12,7 @@ import java.util.List;
  * <p>A purchase contains general transaction information
  * and a collection of purchase-detail lines.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class Purchase {

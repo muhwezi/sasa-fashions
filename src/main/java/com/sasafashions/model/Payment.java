@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 /**
  * Represents a payment received for a tailoring order.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class Payment {

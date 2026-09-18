@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Performs database operations involving orders and
  * their order-detail records.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class OrderDAO {

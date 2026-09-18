@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * This class saves, finds, updates, deletes, lists
  * and navigates product records.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class ProductDAO {

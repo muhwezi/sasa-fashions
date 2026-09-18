@@ -15,7 +15,7 @@ import java.util.Arrays;
  * <p>The form authenticates users, creates an application session,
  * enforces compulsory password changes and opens the main menu.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  */
 public class LoginForm extends JFrame {
 

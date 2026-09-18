@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * A Product object corresponds to one record in the
  * products database table.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class Product {

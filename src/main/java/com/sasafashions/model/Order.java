@@ -6,7 +6,7 @@ import java.time.LocalDate;
 /**
  * Represents a tailoring order placed by a customer.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class Order {

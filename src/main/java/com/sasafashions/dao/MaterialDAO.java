@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * <p>It also provides methods for retrieving available
  * materials and materials requiring restocking.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class MaterialDAO {

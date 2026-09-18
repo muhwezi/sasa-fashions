@@ -13,7 +13,7 @@ import java.util.Queue;
  * Queue is the third major data structure used by
  * the Sasa Fashions application.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class OrderQueue {

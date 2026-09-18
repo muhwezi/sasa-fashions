@@ -21,7 +21,7 @@ import java.util.Arrays;
  * Administrator already exists. It should normally be run
  * only once during initial system installation.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public final class InitialAdminSetup {

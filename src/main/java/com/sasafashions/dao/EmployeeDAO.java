@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * This DAO can save, find, update, delete, list and
  * navigate employee records.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class EmployeeDAO {

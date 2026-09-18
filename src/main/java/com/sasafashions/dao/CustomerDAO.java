@@ -17,7 +17,7 @@ import java.sql.SQLException;
  * This DAO provides methods for saving, finding, updating,
  * deleting and navigating customer records.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class CustomerDAO {

@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * <p>The supported operations include saving, finding, editing,
  * deleting and navigating supplier records.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class SupplierDAO {

@@ -17,7 +17,7 @@ import java.awt.event.WindowEvent;
  * <p>The frame contains ten Data functions, five PDF reports and
  * account-management functions.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  */
 public class MainMenuFrame extends JFrame {
 

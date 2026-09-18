@@ -41,7 +41,7 @@ public class PaymentForm extends JFrame {
     private final OrderDAO orderDAO;
     private final EmployeeDAO employeeDAO;
 
-    /*
+    /**
      * Maps are used to connect the text displayed in
      * the combo boxes to the actual Java objects.
      */

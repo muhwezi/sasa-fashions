@@ -6,7 +6,7 @@ package com.sasafashions.model;
  * An Employee object corresponds to one record in
  * the employees database table.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class Employee {

@@ -34,7 +34,7 @@ import java.time.format.DateTimeParseException;
  * <p>The form supports creating, finding, editing, deleting
  * and navigating supplier records.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class SupplierForm extends JFrame {

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Generates custom IDs used by Sasa Fashions.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public final class IdGenerator {

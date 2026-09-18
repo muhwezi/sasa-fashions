@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * who performed an action, the affected record and when
  * the action occurred.</p>
  *
- * @author Joshua Muhwezi
+ *@author SASA Group
  * @version 1.0
  * 
  * 

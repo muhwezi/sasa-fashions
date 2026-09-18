@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
  * The form supports saving, finding, editing, deleting,
  * navigating and displaying employee records.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class EmployeeForm extends JFrame {

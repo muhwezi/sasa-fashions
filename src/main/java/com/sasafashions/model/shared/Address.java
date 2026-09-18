@@ -4,7 +4,7 @@ package com.sasafashions.model.shared;
  * Represents address information that can be used by
  * customers, employees and suppliers.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class Address {

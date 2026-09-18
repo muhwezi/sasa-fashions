@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * This DAO saves, finds, updates, deletes, lists and
  * navigates customer measurement records.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class MeasurementDAO {

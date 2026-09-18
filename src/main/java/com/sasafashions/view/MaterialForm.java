@@ -39,7 +39,7 @@ import java.util.ArrayList;
  * navigating material records. It also displays material stock
  * values and identifies materials that require restocking.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class MaterialForm extends JFrame {

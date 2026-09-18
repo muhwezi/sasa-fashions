@@ -19,7 +19,7 @@ import java.util.Map;
  * <p>The form supports saving, finding, editing, deleting,
  * password resetting, account unlocking and record navigation.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  */
 public class UserForm extends JFrame {
 

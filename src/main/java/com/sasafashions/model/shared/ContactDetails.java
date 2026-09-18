@@ -4,7 +4,7 @@ package com.sasafashions.model.shared;
  * Stores and validates contact information used by
  * customers, employees and suppliers.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class ContactDetails {

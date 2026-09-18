@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 /**
  *
- * @author HP
+ * @author SASA Group
  */
 public class CustomerForm extends javax.swing.JFrame {
     private final CustomerDAO customerDAO = new CustomerDAO();

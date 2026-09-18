@@ -9,7 +9,7 @@ import com.sasafashions.model.User;
  * <p>This class uses static methods because only one user session
  * should be active while the desktop application is running.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  */
 public final class SessionManager {
 

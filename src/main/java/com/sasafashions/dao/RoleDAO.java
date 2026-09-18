@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * <p>Roles are configuration records and are normally
  * maintained directly during system setup.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class RoleDAO {

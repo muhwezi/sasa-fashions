@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Represents one product line contained in an order.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class OrderDetail {

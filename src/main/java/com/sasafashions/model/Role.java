@@ -3,7 +3,7 @@ package com.sasafashions.model;
 /**
  * Represents a system security role.
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class Role {

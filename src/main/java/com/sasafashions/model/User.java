@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * <p>The object stores the password hash but never stores
  * or exposes a plain-text password.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class User {

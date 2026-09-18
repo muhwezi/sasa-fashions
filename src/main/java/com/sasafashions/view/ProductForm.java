@@ -36,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
  * The form demonstrates HashMap by storing products
  * against their product IDs for quick retrieval.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class ProductForm extends JFrame {

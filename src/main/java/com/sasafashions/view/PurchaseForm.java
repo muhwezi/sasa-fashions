@@ -47,7 +47,7 @@ import java.util.Map;
  * and multiple materials. Saving a completed purchase
  * automatically updates material stock.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class PurchaseForm extends JFrame {

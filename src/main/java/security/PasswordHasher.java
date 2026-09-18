@@ -13,7 +13,7 @@ import javax.crypto.spec.PBEKeySpec;
  * and repeated hashing. Plain-text passwords are never
  * saved in the database.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public final class PasswordHasher {

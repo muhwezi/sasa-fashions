@@ -48,7 +48,7 @@ import java.util.Map;
  * <p>The class uses OpenPDF to create customer, order, payment,
  * material-stock and purchase reports.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  */
 public class PdfReportGenerator {
 

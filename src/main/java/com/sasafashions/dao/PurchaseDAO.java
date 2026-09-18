@@ -25,7 +25,7 @@ import java.util.Set;
  * records, purchase details and material stock quantities
  * are updated as one complete operation.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class PurchaseDAO {

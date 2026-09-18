@@ -16,7 +16,7 @@ import java.util.Arrays;
  * <p>The form can enforce a compulsory password change when a user
  * logs in with a temporary password.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  */
 public class ChangePasswordForm extends JFrame {
 

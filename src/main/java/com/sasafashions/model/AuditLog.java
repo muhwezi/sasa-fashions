@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Represents an auditable action performed in the system.
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class AuditLog {

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class PaymentDAO {
 
-    /*
+    /**
      * Generates payment IDs such as:
      * PAY-0001
      * PAY-0002

@@ -43,7 +43,7 @@ import javax.swing.table.DefaultTableModel;
  * Provides the interface for creating and managing
  * tailoring orders.
  *
- * @author HP
+ * @author SASA Group
  * @version 1.0
  */
 public class OrderForm extends JFrame {

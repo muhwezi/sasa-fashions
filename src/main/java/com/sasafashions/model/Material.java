@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * <p>A material has a unit of measurement, stock quantity,
  * reorder level, unit cost and availability status.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class Material {

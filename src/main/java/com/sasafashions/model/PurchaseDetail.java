@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * <p>Each detail identifies the purchased material,
  * quantity and cost per unit.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class PurchaseDetail {

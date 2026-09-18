@@ -7,7 +7,7 @@ import javax.swing.*;
 /**
  * Main entry point for the Sasa Fashions Management System.
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  */
 public class Sasafashion {
 

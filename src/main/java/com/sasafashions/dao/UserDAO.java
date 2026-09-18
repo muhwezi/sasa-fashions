@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Accounts are temporarily locked after three consecutive
  * unsuccessful login attempts.</p>
  *
- * @author Joshua Muhwezi
+ * @author SASA Group
  * @version 1.0
  */
 public class UserDAO {
