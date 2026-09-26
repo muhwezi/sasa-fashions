@@ -6,36 +6,41 @@
  * to communicate with the Sasa Fashions application server
  * without receiving direct access to the MySQL database.</p>
  *
- * <p>The principal classes are:</p>
+ * <p>The principal classes include:</p>
  *
  * <ul>
  *     <li>
  *         {@link com.sasafashions.network.SasaNetworkServer}
- *         - accepts TCP client connections
+ *         - listens for TCP connections
  *     </li>
  *
  *     <li>
  *         {@link com.sasafashions.network.ClientHandler}
- *         - processes commands from one connected client
+ *         - handles one connected client
  *     </li>
  *
  *     <li>
  *         {@link com.sasafashions.network.NetworkDataService}
- *         - provides controlled access to Sasa Fashions
- *         business data
+ *         - retrieves approved business information
  *     </li>
  *
  *     <li>
  *         {@link com.sasafashions.network.NetworkClient}
- *         - sends commands to the server
+ *         - command-line testing client
+ *     </li>
+ *
+ *     <li>
+ *         {@link com.sasafashions.network.NetworkClientFrame}
+ *         - graphical Swing network client
  *     </li>
  * </ul>
  *
- * <p>The package demonstrates Java sockets, TCP communication,
- * threads, interfaces, exception handling, object collaboration,
- * JDBC integration and separation of concerns.</p>
+ * <p>The package demonstrates TCP sockets, client-server
+ * architecture, multithreading, interfaces, Swing,
+ * event-driven programming, JDBC integration, exception
+ * handling and separation of concerns.</p>
  *
  * @author SASA Group
- * @version 1.2
+ * @version 1.3
  */
 package com.sasafashions.network;
